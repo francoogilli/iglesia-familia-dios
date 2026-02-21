@@ -47,6 +47,7 @@ export function PodcastPage() {
         onSkipBackward={player.skipBackward}
         onVolumeChange={player.setVolume}
         onToggleMute={player.toggleMute}
+        onClose={player.close}
       />
 
       {/* Spacer for bottom player */}

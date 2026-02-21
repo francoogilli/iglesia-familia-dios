@@ -166,6 +166,19 @@ export function useAudioPlayer() {
     })
   }, [])
 
+  const close = useCallback(() => {
+    stopTimer()
+    stopSound()
+    offsetRef.current = 0
+    setState((prev) => ({
+      ...prev,
+      currentEpisode: null,
+      isPlaying: false,
+      currentTime: 0,
+      duration: 0,
+    }))
+  }, [stopTimer, stopSound])
+
   useEffect(() => {
     return () => {
       stopTimer()
@@ -183,5 +196,6 @@ export function useAudioPlayer() {
     skipBackward,
     setVolume,
     toggleMute,
+    close,
   }
 }

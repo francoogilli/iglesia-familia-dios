@@ -1,28 +1,38 @@
-"use client"
+"use client";
 
-import { Play, Pause, Volume2, VolumeX, RotateCcw, RotateCw, ListMusic } from "lucide-react"
-import { Slider } from "@/components/ui/slider"
-import type { Episode } from "@/lib/podcast-data"
+import {
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  RotateCcw,
+  RotateCw,
+  ListMusic,
+  X,
+} from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import type { Episode } from "@/lib/podcast-data";
 
 interface AudioPlayerProps {
-  currentEpisode: Episode | null
-  isPlaying: boolean
-  currentTime: number
-  duration: number
-  volume: number
-  isMuted: boolean
-  onTogglePlay: () => void
-  onSeek: (time: number) => void
-  onSkipForward: () => void
-  onSkipBackward: () => void
-  onVolumeChange: (volume: number) => void
-  onToggleMute: () => void
+  currentEpisode: Episode | null;
+  isPlaying: boolean;
+  currentTime: number;
+  duration: number;
+  volume: number;
+  isMuted: boolean;
+  onTogglePlay: () => void;
+  onSeek: (time: number) => void;
+  onSkipForward: () => void;
+  onSkipBackward: () => void;
+  onVolumeChange: (volume: number) => void;
+  onToggleMute: () => void;
+  onClose: () => void; // <-- nuevo prop
 }
 
 function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60)
-  const secs = Math.floor(seconds % 60)
-  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
 export function AudioPlayer({
@@ -38,10 +48,11 @@ export function AudioPlayer({
   onSkipBackward,
   onVolumeChange,
   onToggleMute,
+  onClose,
 }: AudioPlayerProps) {
-  if (!currentEpisode) return null
+  if (!currentEpisode) return null;
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50">
@@ -57,7 +68,7 @@ export function AudioPlayer({
         {/* Play/Pause Button */}
         <button
           onClick={onTogglePlay}
-          className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center hover:bg-foreground/90 transition-colors flex-shrink-0"
+          className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center hover:bg-foreground/90 transition-colors shrink-0"
           aria-label={isPlaying ? "Pausar" : "Reproducir"}
         >
           {isPlaying ? (
@@ -68,7 +79,7 @@ export function AudioPlayer({
         </button>
 
         {/* Episode Info */}
-        <div className="min-w-0 flex-shrink-0 w-48">
+        <div className="min-w-0 shrink-0 w-48">
           <p className="text-sm font-semibold text-foreground truncate">
             {currentEpisode.title}
           </p>
@@ -80,7 +91,7 @@ export function AudioPlayer({
         </div>
 
         {/* Skip controls */}
-        <div className="flex items-center gap-1 flex-shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           <button
             onClick={onSkipBackward}
             className="p-1.5 text-muted-foreground hover:text-foreground transition-colors"
@@ -115,20 +126,20 @@ export function AudioPlayer({
         </div>
 
         {/* Time */}
-        <div className="flex-shrink-0 text-xs font-mono text-muted-foreground tabular-nums">
+        <div className="shrink-0 text-xs font-mono text-muted-foreground tabular-nums">
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
 
         {/* Playlist icon */}
         <button
-          className="p-1.5 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0 hidden md:block"
+          className="p-1.5 text-muted-foreground hover:text-foreground transition-colors shrink-0 hidden md:block"
           aria-label="Lista de devocionales"
         >
           <ListMusic className="w-4 h-4" />
         </button>
 
         {/* Volume */}
-        <div className="flex items-center gap-2 flex-shrink-0 hidden sm:flex">
+        <div className="items-center gap-2 shrink-0 hidden sm:flex">
           <button
             onClick={onToggleMute}
             className="p-1.5 text-muted-foreground hover:text-foreground transition-colors"
@@ -150,7 +161,17 @@ export function AudioPlayer({
             aria-label="Volumen"
           />
         </div>
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="p-1.5 text-muted-foreground hover:text-foreground transition-colors shrink-0"
+          aria-label="Cerrar reproductor"
+          title="Cerrar reproductor"
+        >
+          <X className="w-4 h-4" />
+        </button>
       </div>
     </div>
-  )
+  );
 }
