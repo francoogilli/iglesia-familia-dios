@@ -36,22 +36,37 @@ function ApplePodcastsIcon({ className }: { className?: string }) {
   )
 }
 
-function GlobeIcon({ className }: { className?: string }) {
+function MapPinIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   )
 }
 
-function RSSIcon({ className }: { className?: string }) {
+function ClockIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 11a9 9 0 0 1 9 9" />
-      <path d="M4 4a16 16 0 0 1 16 16" />
-      <circle cx="5" cy="19" r="1" />
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  )
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12.22 19.79 19.79 0 0 1 1.64 3.6 2 2 0 0 1 3.62 1.44h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.54-1.54a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  )
+}
+
+function MailIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+      <polyline points="22,6 12,13 2,6" />
     </svg>
   )
 }
@@ -62,7 +77,7 @@ export function PodcastSidebar() {
   const truncatedAbout = podcastInfo.about.slice(0, 180) + "..."
 
   return (
-    <aside className="w-full lg:w-80 lg:min-w-80 flex-shrink-0">
+    <aside className="w-full lg:w-80 lg:min-w-80 shrink-0">
       <div className="lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto p-6 lg:p-8">
         {/* Cover Art */}
         <div className="rounded-lg overflow-hidden shadow-md mb-6">
@@ -102,70 +117,76 @@ export function PodcastSidebar() {
           </button>
         </div>
 
-        {/* Listen Section */}
+        {/* Church Info Section */}
         <div>
-          <h2 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-3">
+          <h2 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
             <span className="flex gap-0.5">
               <span className="w-1 h-3 bg-primary rounded-full" />
               <span className="w-1 h-3 bg-primary/60 rounded-full" />
             </span>
-            Escuchar en
+            Nuestra Iglesia
           </h2>
-          <div className="flex flex-col gap-3">
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <YouTubeIcon className="w-8 h-8 text-[#FF0000] group-hover:scale-105 transition-transform" />
-              <span>YouTube</span>
-            </a>
-            <a
-              href="https://open.spotify.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <SpotifyIcon className="w-8 h-8 text-[#1DB954] group-hover:scale-105 transition-transform" />
-              <span>Spotify</span>
-            </a>
-            <a
-              href="https://podcasts.apple.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <ApplePodcastsIcon className="w-8 h-8 text-[#9933CC] group-hover:scale-105 transition-transform" />
-              <span>Apple Podcasts</span>
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <FacebookIcon className="w-8 h-8 text-[#1877F2] group-hover:scale-105 transition-transform" />
-              <span>Facebook</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center group-hover:scale-105 transition-transform">
-                <GlobeIcon className="w-4 h-4 text-foreground/50" />
+
+          <div className="flex flex-col gap-4">
+            {/* Address */}
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <MapPinIcon className="w-4 h-4 text-primary" />
               </div>
-              <span>Sitio Web</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center group-hover:scale-105 transition-transform">
-                <RSSIcon className="w-4 h-4 text-foreground/50" />
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-0.5">Dirección</p>
+                <p className="text-xs text-foreground/70 leading-snug">
+                  Av. Principal 1234
+                  Ciudad, País
+                </p>
               </div>
-              <span>RSS Feed</span>
-            </a>
+            </div>
+
+            {/* Service Schedule */}
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <ClockIcon className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-0.5">Servicios</p>
+                <p className="text-xs text-foreground/70 leading-snug">
+                  Domingos: 9:00 am y 11:00 am<br />
+                  Miércoles: 7:00 pm
+                </p>
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <PhoneIcon className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-0.5">Teléfono</p>
+                <a
+                  href="tel:+1234567890"
+                  className="text-xs text-foreground/70 hover:text-primary transition-colors"
+                >
+                  +1 (234) 567-890
+                </a>
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <MailIcon className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-0.5">Correo</p>
+                <a
+                  href="mailto:info@iglesia.com"
+                  className="text-xs text-foreground/70 hover:text-primary transition-colors"
+                >
+                  info@iglesia.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
